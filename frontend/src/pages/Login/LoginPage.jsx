@@ -6,7 +6,6 @@ import { Button, Input } from "@nextui-org/react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useEffect } from "react";
-//creating Login Scheme using zod
 const LoginScheme = z.object({
   username: z.string().min(4, { message: "Username atleast contain 4 character" }),
   password: z.string().min(4, { message: "Password (string only) atleast contain 4 character" }),
@@ -18,10 +17,7 @@ const LoginRegister = () => {
     console.log(`Ini token kamu : ${token}`);
   }, []);
 
-  //cek token selalu
-
   const navigate = useNavigate();
-  // const [isLogin, setIsLogin] = useState(true);
 
   const form = useForm({
     defaultValues: {
@@ -34,14 +30,11 @@ const LoginRegister = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Send login data to backend
       const response = await axios.post("http://localhost:3000/api/auth/login", data);
 
       const token = response.data.token;
       localStorage.setItem("token", token);
-      // Check if login is successful
       if (response.data.success) {
-        // alert("Login successful!");
         toast.success(response.data.message || "Login successful!");
         navigate("/add-image");
       } else {

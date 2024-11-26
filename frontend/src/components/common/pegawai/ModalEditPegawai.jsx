@@ -1,4 +1,3 @@
-//src/components/common/pegawai/ModalEditPegawai.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Radio, RadioGroup } from "@nextui-org/react";

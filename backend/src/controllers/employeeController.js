@@ -61,7 +61,6 @@ const createEmployee = async (req, res) => {
   try {
     const { nip, nama, tempat_lahir, alamat, tanggal_lahir, jenis_kelamin, golongan_id, eselon, jabatan_id, unit_kerja_id, tempat_tugas, agama, no_hp, npwp } = req.body;
 
-    // Validate required fields
     if (!agama || !jenis_kelamin) {
       return res.status(400).json({
         error: "NIP, nama, dan jenis kelamin wajib diisi",
@@ -69,16 +68,6 @@ const createEmployee = async (req, res) => {
       });
     }
 
-    // Check if NIP already exists
-    // const existingEmployee = await Employee.findOne({ where: { nip } });
-    // if (existingEmployee) {
-    //   return res.status(400).json({
-    //     error: "NIP sudah terdaftar",
-    //     success: false,
-    //   });
-    // }
-
-    // Create employee with validated data
     const employee = await Employee.create({
       nip,
       nama,
@@ -199,7 +188,7 @@ const exportEmployees = async (req, res) => {
     const search = req.query.search || "";
     const unit_kerja_id = req.query.unit_kerja_id;
 
-    // Build where clause based on filters
+    
     const whereClause = {
       [Op.or]: [{ nama: { [Op.like]: `%${search}%` } }, { nip: { [Op.like]: `%${search}%` } }],
     };
@@ -214,7 +203,7 @@ const exportEmployees = async (req, res) => {
       order: [["createdAt", "ASC"]],
     });
 
-    // If export format is CSV
+    
     if (req.query.format === "csv") {
       const csvData = employees.map((e) => ({
         NIP: e.nip,
@@ -233,7 +222,7 @@ const exportEmployees = async (req, res) => {
       return res.send(csv);
     }
 
-    // Default: Return JSON data
+    
     res.json(employees);
   } catch (error) {
     console.error("Error exporting employees:", error);
@@ -244,7 +233,6 @@ const exportEmployees = async (req, res) => {
   }
 };
 
-// Utility to convert JSON to CSV
 const convertToCSV = (data) => {
   const headers = Object.keys(data[0]).join(",");
   const rows = data.map((row) => Object.values(row).join(",")).join("\n");

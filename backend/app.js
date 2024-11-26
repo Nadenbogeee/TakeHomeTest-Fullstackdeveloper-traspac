@@ -35,5 +35,4 @@ sequelize
     console.error("Database sync error:", err);
   });
 
-// Serve static files from uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "./uploads")));

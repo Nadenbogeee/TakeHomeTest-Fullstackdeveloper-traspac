@@ -10,7 +10,6 @@ const ProfileComponent = () => {
   const fileInputRef = useRef(null);
   const BASE_URL = "http://localhost:3000";
 
-  //get Profile picture
   const getProfile = async () => {
     try {
       setLoading(true);
@@ -44,7 +43,6 @@ const ProfileComponent = () => {
     fileInputRef.current?.click();
   };
 
-  //update/edit profile picture
   const handleFileChange = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;

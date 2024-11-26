@@ -35,10 +35,10 @@ const Register = async (req, res) => {
       });
     }
 
-    // Create user
+    
     const user = await User.create({ username, password });
 
-    // Generate token
+    
     const token = generateToken(user);
 
     res.status(201).json({
@@ -58,7 +58,7 @@ const Register = async (req, res) => {
   }
 };
 
-// Login
+// Login -------------------
 const Login = async (req, res) => {
   try {
     const { username, password } = req.body;

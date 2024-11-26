@@ -9,7 +9,6 @@ import ModalEditPegawai from "../common/pegawai/ModalEditPegawai";
 import CetakDataPegawai from "../common/pegawai/CetakDataPegawai";
 
 const MainComponent = () => {
-  // State management
   const [dataEmployees, setDataEmployees] = useState([]);
   const [isModalEditPegawaiOpen, setIsModalEditPegawaiOpen] = useState(false);
   const [selectedDataEmployees, setSelectedDataEmployees] = useState(null);
@@ -20,19 +19,16 @@ const MainComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUnit, setSelectedUnit] = useState("");
 
-  // Debounced search function
   const debouncedSearch = debounce((query, unit, page) => {
     getAllEmployees(page, query, unit);
   }, 1500);
 
-  // Main data fetching function
   const getAllEmployees = async (page, search = searchQuery, unit = selectedUnit) => {
     try {
       setIsLoading(true);
       setError(null);
       const token = localStorage.getItem("token");
 
-      // Build query parameters
       const params = new URLSearchParams({
         page: page,
         limit: 10,
@@ -61,14 +57,12 @@ const MainComponent = () => {
     }
   };
 
-  // Effect hook for search and filter
   useEffect(() => {
     setCurrentPage(1);
     setDataEmployees([]);
     debouncedSearch(searchQuery, selectedUnit, 1);
   }, [searchQuery, selectedUnit]);
 
-  // Event handlers
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };

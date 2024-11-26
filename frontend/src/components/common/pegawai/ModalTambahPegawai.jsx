@@ -24,7 +24,6 @@ const ModalTambahPegawai = () => {
     npwp: "",
   });
 
-  //post
   const handleSubmit = async (onClose) => {
     try {
       setLoading(true);
@@ -33,9 +32,9 @@ const ModalTambahPegawai = () => {
       const formattedData = {
         ...tambahPegawai,
         jenis_kelamin: tambahPegawai.jenis_kelamin === "Pria" ? "L" : "P",
-        golongan_id: tambahPegawai.golongan_id || null, // Tetap sebagai string
-        jabatan_id: tambahPegawai.jabatan_id || null, // Tetap sebagai string
-        unit_kerja_id: tambahPegawai.unit_kerja_id || null, // Tetap sebagai string
+        golongan_id: tambahPegawai.golongan_id || null, 
+        jabatan_id: tambahPegawai.jabatan_id || null, 
+        unit_kerja_id: tambahPegawai.unit_kerja_id || null,
       };
 
       const response = await axios.post("http://localhost:3000/api/employees", formattedData, {

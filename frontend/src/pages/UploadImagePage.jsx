@@ -36,7 +36,7 @@ const UploadImagePage = () => {
     formData.append("profilePicture", selectedImage);
 
     try {
-      const token = localStorage.getItem("token"); // Asumsi token disimpan di localStorage
+      const token = localStorage.getItem("token");
       const response = await axios.post("http://localhost:3000/api/auth/upload-profile-picture", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,7 +44,6 @@ const UploadImagePage = () => {
       });
 
       if (response.status === 200) {
-        // Pastikan status code valid
         toast.success("Gambar berhasil di upload");
         navigate("/mainpage");
       } else {

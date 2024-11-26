@@ -41,13 +41,11 @@ const CetakDataPegawai = () => {
   }, []);
 
   const handleCetakPDF = () => {
-    const doc = new jsPDF("l", "mm", "a4"); // Set to landscape orientation
+    const doc = new jsPDF("l", "mm", "a4");
 
-    // Add title
     doc.setFontSize(14);
     doc.text("Data Pegawai", 15, 10);
 
-    // Define the columns exactly as in the table
     const columns = [
       { header: "No", dataKey: "no" },
       { header: "NIP", dataKey: "nip" },
@@ -66,7 +64,6 @@ const CetakDataPegawai = () => {
       { header: "NPWP", dataKey: "npwp" },
     ];
 
-    // Prepare the data
     const tableData = dataEmployees.map((employee, index) => ({
       no: index + 1,
       nip: employee.nip || "",
@@ -85,7 +82,6 @@ const CetakDataPegawai = () => {
       npwp: employee.npwp || "",
     }));
 
-    // Generate table
     doc.autoTable({
       columns: columns.map((col) => ({
         header: col.header,
@@ -130,7 +126,6 @@ const CetakDataPegawai = () => {
       theme: "grid",
     });
 
-    // Save the PDF
     doc.save("data_pegawai.pdf");
   };
 
